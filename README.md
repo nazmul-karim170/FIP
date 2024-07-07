@@ -55,7 +55,7 @@ Implementation of FIP
 
 ### Create Benign and Backdoor Models 
 
-#### FOR CIFAR10
+#### For Cifar10
 
 * To train a benign model
 
@@ -69,9 +69,47 @@ python train_backdoor_cifar.py --poison-type benign --output-dir /folder/to/save
 python train_backdoor_cifar.py --poison-type blend --poison-rate 0.10 --output-dir /folder/to/save --gpuid 0 
 ```
 
+#### For GTSRB, tinyImageNet, ImageNet
+
+* Follow the same training pipeline as Cifar10 and change the trigger size, poison-rate, and data transformations according to the dataset.
+  
+* For ImageNet, you can download pre-trained ResNet50 model weights from PyTorch first, then train this benign model with "clean and backdoor training data" for 20 epochs to insert the backdoor.
+
+#### For Action Recognition
+
+* Follow <a href="https://github.com/ShihaoZhaoZSH/Video-Backdoor-Attack">this link</a> to create the backdoor model.
+  
+#### For Object Detection 
+
+* First, download the GitHub repository of <a href="https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Object-Detection">SSD Object Detection</a> pipeline.
+
+* Follow Algorithm 1 and 2 in  <a href="https://openreview.net/pdf?id=rFQfjDC9Mt ">Clean-Image Backdoor</a> for "Trigger Selection" and "Label Poisoning".
+
+* Once you have the triggered data, train the model following <a href="https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Object-Detection">SSD Object Detection</a>.
+
+https://github.com/zhenxianglance/PCBA
+
+#### For 3D Point Cloud Classifier
+
+* Follow <a href="https://github.com/zhenxianglance/PCBA">this link</a> to create the backdoor model.
+
+#### For Language Generation
+
+* Follow <a href="https://github.com/ShannonAI/backdoor_nlg">this link</a> to create the backdoor model.
+
+
+### FIP based Backdoor Purification 
+
+#### For Language Generation
+* Follow <a href="https://aclanthology.org/2020.coling-main.305/">this link</a> to apply MixUp.
+
 
 
 ## 🚀 Purification Results
+
+
+
+
 
 ### Fisher Information-based purification
 
