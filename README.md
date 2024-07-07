@@ -87,8 +87,6 @@ python train_backdoor_cifar.py --poison-type blend --poison-rate 0.10 --output-d
 
 * Once you have the triggered data, train the model following <a href="https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Object-Detection">SSD Object Detection</a>.
 
-https://github.com/zhenxianglance/PCBA
-
 #### For 3D Point Cloud Classifier
 
 * Follow <a href="https://github.com/zhenxianglance/PCBA">this link</a> to create the backdoor model.
@@ -100,8 +98,16 @@ https://github.com/zhenxianglance/PCBA
 
 ### FIP based Backdoor Purification 
 
-#### For Language Generation
-* Follow <a href="https://aclanthology.org/2020.coling-main.305/">this link</a> to apply MixUp.
+* To remove the backdoor with 1% clean validation data-
+  
+	```bash
+	python Remove_Backdoor_SFT.py --poison-type blend --val-frac 0.01 --checkpoint path/to/backdoor/model --gpuid 0 
+	```
+* The Algorithm is the same for all tasks, except the MixUp technique may be slightly different from task to task. For Example,
+
+  	* You can follow <a href="https://arxiv.org/html/2303.10343v2">this paper</a> for MixUp in Object Detection
+
+  	* For Language Generation, follow <a href="https://aclanthology.org/2020.coling-main.305/">this link</a> to apply MixUp.
 
 
 
