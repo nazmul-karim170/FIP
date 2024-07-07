@@ -16,11 +16,9 @@
 <img src="assets/fip_analysis.png"/>
 
 ## 😮 Highlights
-We design a novel DL-based reconstruction framework to tackle the problem of high-quality and fast image recovery in single-pixel imaging
 
 
 ### 💡 Fast and Effective Backdoor Purification 
-- Deep Learning for Reconstruction instead of tradiational L1-norm solution   -->    
 - Clean Accuracy Retainer clean accuracy --> High-quality
 
 
@@ -75,7 +73,7 @@ python -m util_scripts.ucf101_json annotation_dir_path jpg_video_dir_path dst_js
 
 ### tSNE Plot
 
-<img src="assets/fip_tsner_plot.png"/>
+<img src="assets/fip_tsne_plot.png"/>
 
 ## ✏️ Citation
 If you find our paper and code useful in your research, please consider giving a star :star: and a citation :pencil:.
