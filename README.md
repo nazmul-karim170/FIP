@@ -40,30 +40,36 @@ Welcome to **watch** 👀 this repository for the latest updates.
 ## Code for Training
 Implementation of FIP 
 
-1. First download the STL10 and UCF101 datasets. You can find both of these datasets very easily. 
-			 
-3. If you Want to Create the images that will be fed to the GAN, Run Matlab code "L2Norm_Solution.m" for generating the l2-norm solution. Make Necessary Folders before run. I will also upload the python version of this in future.  		
-		
-4. Run "save_numpy.py" to create the .npy file under different settings. 
 
-5. Run "Main_Reconstruction.py" to perform the Training.
+### Download the Datasets
+* Image Classification (CIFAR10, <a href="https://kaggle.com/datasets/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign/data">GTSRB</a>, <a href="https://www.kaggle.com/datasets/nikhilshingadiya/tinyimagenet200">GTSRB</a>, <a href="https://www.kaggle.com/c/imagenet-object-localization-challenge/data">ImageNet</a>)
+
+* Action Recognition (<a href="https://www.kaggle.com/datasets/pevogam/ucf101">UCF-101</a>, <a href="https://www.kaggle.com/datasets/easonlll/hmdb51">HMDB51</a>)
+
+* Object Detection (<a href="https://www.kaggle.com/datasets/sabahesaraki/2017-2017">MS-COCO</a>, <a href="https://www.kaggle.com/datasets/gopalbhattrai/pascal-voc-2012-dataset">Pascal VOC</a>)
+  
+* 3D Point Cloud Classifier (<a href="https://www.kaggle.com/datasets/balraj98/modelnet40-princeton-3d-object-dataset">ModelNet40</a>)
+
+* Natural Language Processing (NLP) (<a href="https://www.kaggle.com/datasets/mohamedlotfy50/wmt-2014-english-german">WMT2014 En-De</a>, <a href="https://opus.nlpl.eu/OpenSubtitles/corpus/version/OpenSubtitles">OpenSubtitles2012</a>)
 
 
-### Data Preaparation for Video Reconstruction: UCF-101
+### Create Benign and Backdoor Models 
 
-* Download videos and train/test splits [here](http://crcv.ucf.edu/data/UCF101.php).
-* Convert from avi to jpg files using ```util_scripts/generate_video_jpgs.py```
+#### FOR CIFAR10
 
-```bash
-python -m util_scripts.generate_video_jpgs avi_video_dir_path jpg_video_dir_path ucf101
-```
-
-* Generate annotation file in json format similar to ActivityNet using ```util_scripts/ucf101_json.py```
-  * ```annotation_dir_path``` includes classInd.txt, trainlist0{1, 2, 3}.txt, testlist0{1, 2, 3}.txt
+* To train a benign model
 
 ```bash
-python -m util_scripts.ucf101_json annotation_dir_path jpg_video_dir_path dst_json_path
+python train_backdoor_cifar.py --poison-type benign --output-dir /folder/to/save --gpuid 0 
 ```
+
+* To train a backdoor model with the "blend" attack with a poison ratio of 10%
+
+```bash
+python train_backdoor_cifar.py --poison-type blend --poison-rate 0.10 --output-dir /folder/to/save --gpuid 0 
+```
+
+
 
 ## 🚀 Purification Results
 
