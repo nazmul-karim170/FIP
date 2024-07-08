@@ -19,8 +19,9 @@
 
 
 ### 💡 Fast and Effective Backdoor Purification 
-- Clean Accuracy Retainer clean accuracy --> High-quality
-
+- Novel Perspective for Backdoor Analysis
+- Novel Algorithm for Backdoor Purification
+- Extensive Experimental Evaluation on Multiple Tasks
 
 
 ## 🚩 **Updates**
@@ -37,9 +38,20 @@ Welcome to **watch** 👀 this repository for the latest updates.
 
 <img src="assets/fip_summary.png"/>
 
-## Code for Training
-Implementation of FIP 
+## PyTorch Implementation 
 
+### Create Conda Environment 
+
+* Install <a href="https://docs.anaconda.com/anaconda/install/linux/">Anaconda</a> and create an environment
+	```bash
+	conda create -n fip-env python=3.10
+ 	conda activate fip-env
+	```
+
+* After creating a virtual environment, run
+	```bash
+	pip install -r requirements.txt
+	```
 
 ### Download the Datasets
 * Image Classification (CIFAR10, <a href="https://kaggle.com/datasets/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign/data">GTSRB</a>, <a href="https://www.kaggle.com/datasets/nikhilshingadiya/tinyimagenet200">GTSRB</a>, <a href="https://www.kaggle.com/c/imagenet-object-localization-challenge/data">ImageNet</a>)
@@ -55,7 +67,7 @@ Implementation of FIP
 
 ### Create Benign and Backdoor Models 
 
-#### For Cifar10
+##### For Cifar10
 
 * To train a benign model
 
@@ -69,17 +81,17 @@ python train_backdoor_cifar.py --poison-type benign --output-dir /folder/to/save
 python train_backdoor_cifar.py --poison-type blend --poison-rate 0.10 --output-dir /folder/to/save --gpuid 0 
 ```
 
-#### For GTSRB, tinyImageNet, ImageNet
+##### For GTSRB, tinyImageNet, ImageNet
 
 * Follow the same training pipeline as Cifar10 and change the trigger size, poison-rate, and data transformations according to the dataset.
   
 * For ImageNet, you can download pre-trained ResNet50 model weights from PyTorch first, then train this benign model with "clean and backdoor training data" for 20 epochs to insert the backdoor.
 
-#### For Action Recognition
+##### For Action Recognition
 
 * Follow <a href="https://github.com/ShihaoZhaoZSH/Video-Backdoor-Attack">this link</a> to create the backdoor model.
   
-#### For Object Detection 
+##### For Object Detection 
 
 * First, download the GitHub repository of <a href="https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Object-Detection">SSD Object Detection</a> pipeline.
 
@@ -87,37 +99,63 @@ python train_backdoor_cifar.py --poison-type blend --poison-rate 0.10 --output-d
 
 * Once you have the triggered data, train the model following <a href="https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Object-Detection">SSD Object Detection</a>.
 
-#### For 3D Point Cloud Classifier
+##### For 3D Point Cloud Classifier
 
 * Follow <a href="https://github.com/zhenxianglance/PCBA">this link</a> to create the backdoor model.
 
-#### For Language Generation
+##### For Language Generation
 
 * Follow <a href="https://github.com/ShannonAI/backdoor_nlg">this link</a> to create the backdoor model.
 
 
+### Backdoor Analysis
+
+* For smoothness analysis, run the following-
+	```bash
+	cd Smoothness Analysis
+	```
+
+	```bash
+	python hessian_analysis.py --resume "path-to-the-model"
+	```
+ 
+* NOTE: "pyhessian" is an old package. Updated PyTorch can cause some issues while running this. You may see a lot of warnings. 
+
 ### FIP based Backdoor Purification 
 
-* To remove the backdoor with 1% clean validation data-
+* For CIFAR10, To remove the backdoor with 1% clean validation data-
   
 	```bash
-	python Remove_Backdoor_SFT.py --poison-type blend --val-frac 0.01 --checkpoint path/to/backdoor/model --gpuid 0 
+	python Remove_Backdoor_FIP.py --poison-type blend --val-frac 0.01 --checkpoint "path/to/backdoor/model" --gpuid 0 
 	```
-* The Algorithm is the same for all tasks, except the MixUp technique may be slightly different from task to task. For Example,
 
-  	* You can follow <a href="https://arxiv.org/html/2303.10343v2">this paper</a> for MixUp in Object Detection
+* Please change the dataloader and data transformations according to the dataset.
+   
 
-  	* For Language Generation, follow <a href="https://aclanthology.org/2020.coling-main.305/">this link</a> to apply MixUp.
+### For Adaptive Attack [Attacker has prior knowledge of FIP]
 
+* We can do it in two ways
 
+ 	* We can exactly follow the FIP implementation with high "--reg_F ($eta$_F in the paper)"
+    
+	   	```bash
+		python train_backdoor_with_spect_regul.py --reg_F 0.01 
+		```
+  
+ 	* We can deploy Sharpness-aware minimization (SAM) optimizer during training. Use a value greater than 2 for "--rho"
+    
+	   	```bash
+		python train_backdoor_with_sam.py  --rho 3
+		```
 
+ * With tighter smoothness constraints, it gets harder to find a favorable optimization point for both clean and backdoor data distribution
+   
 ## 🚀 Purification Results
+* FIP is able to purify backdoor by re-optimizing the model to a smoother minima. 
 
+<img src="assets/fip_results.png"/>
 
-
-
-
-### Fisher Information-based purification
+### Eigenvalue Plot During Purification 
 
 <img src="assets/fip_purification_and_runtime.png"/>
 
