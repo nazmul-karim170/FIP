@@ -122,6 +122,7 @@ python train_backdoor_cifar.py --poison-type blend --poison-rate 0.10 --output-d
 * NOTE: "pyhessian" is an old package. Updated PyTorch can cause some issues while running this. You may see a lot of warnings. 
 
 ### FIP based Backdoor Purification 
+* Go to "src" folder
 
 * For CIFAR10, To remove the backdoor with 1% clean validation data-
   
