@@ -4,13 +4,13 @@
 
 <h5 align="center">
 
-[![arXiv](https://img.shields.io/badge/Arxiv-2312.09313-b31b1b.svg?logo=arXiv)](https://arxiv.org/pdf/2409.00863)
+[![arXiv](https://img.shields.io/badge/Arxiv-2312.09313-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2409.00863)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/nazmul-karim170/FIP-Fisher-Backdoor-Removal/blob/main/LICENSE) 
 
 
 </h5>
 
-## [Paper](https://arxiv.org/pdf/2107.01330.pdf) 
+## [Paper](https://arxiv.org/abs/2409.00863) 
 
 ## Smoothness Analysis of Backdoor Models
 <img src="assets/fip_analysis.png"/>
@@ -167,7 +167,13 @@ python train_backdoor_cifar.py --poison-type blend --poison-rate 0.10 --output-d
 ## ✏️ Citation
 If you find our paper and code useful in your research, please consider giving a star :star: and a citation :pencil:.
 
-```BibTeX
+```
+@article{karim2024fisher,
+  title={Fisher information guided purification against backdoor attacks},
+  author={Karim, Nazmul and Arafat, Abdullah Al and Rakin, Adnan Siraj and Guo, Zhishan and Rahnavard, Nazanin},
+  journal={arXiv preprint arXiv:2409.00863},
+  year={2024}
+}
 ```
 <!---->
 
