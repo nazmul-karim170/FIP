@@ -43,18 +43,21 @@ Welcome to **watch** 👀 this repository for the latest updates.
 ### Create Conda Environment 
 
 * Install <a href="https://docs.anaconda.com/anaconda/install/linux/">Anaconda</a> and create an environment
+  
 	```bash
 	conda create -n fip-env python=3.10
  	conda activate fip-env
 	```
 
 * After creating a virtual environment, run
+  
 	```bash
 	pip install -r requirements.txt
 	```
 
 ### Download the Datasets
-* Image Classification (CIFAR10, <a href="https://kaggle.com/datasets/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign/data">GTSRB</a>, <a href="https://www.kaggle.com/datasets/nikhilshingadiya/tinyimagenet200">GTSRB</a>, <a href="https://www.kaggle.com/c/imagenet-object-localization-challenge/data">ImageNet</a>)
+
+* Image Classification ( <a href="[https://kaggle.com/datasets/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign/data](https://www.kaggle.com/c/cifar-10/data)">CIFAR10</a>, <a href="https://kaggle.com/datasets/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign/data">GTSRB</a>, <a href="https://www.kaggle.com/datasets/nikhilshingadiya/tinyimagenet200">Tiny-ImageNet</a>, <a href="https://www.kaggle.com/c/imagenet-object-localization-challenge/data">ImageNet</a>)
 
 * Action Recognition (<a href="https://www.kaggle.com/datasets/pevogam/ucf101">UCF-101</a>, <a href="https://www.kaggle.com/datasets/easonlll/hmdb51">HMDB51</a>)
 
